@@ -1,18 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Routes from './config/route'
 
 
-class Main extends React.Component{
-
-    constructor(props){
-        super(props)
-    }
-
-    render(){
-
-        return(<h1>Welcome Duck....</h1>)
-    }
-
-}
-
-ReactDOM.render(<Main />, document.getElementById('app'));
+ReactDOM.render(<Routes />, document.getElementById('app'));
