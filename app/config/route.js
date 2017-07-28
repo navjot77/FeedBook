@@ -1,20 +1,18 @@
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {Main} from '../container';
+import React from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Main} from '../container'
 
-class Routes extends React.Component{
+class Routes extends React.Component {
 
-
-    render(){
-
-        return(
+  render () {
+    return (
 
             <Router>
                 <Route path='/' component={Main}></Route>
 
             </Router>
         )
-    }
+  }
 }
 
-export default Routes;
+export default Routes
