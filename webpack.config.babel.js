@@ -47,7 +47,7 @@ const developmentConfig= {
 
   devtool:'cheap-module-inline-source-map',
     devServer: {
-        contentBase: PATHS.build,
+        contentBase: paths.build,
         hot: true,
         inline: true,
         progress: true,

@@ -1,0 +1,13 @@
+.display_header {
+ composes: font-bigger from 'sharedStyles.css';
+    color:slateblue;
+    border-bottom: 0.05em solid purple;
+}
+.display_label{
+composes: font-medium from 'sharedStyles.css';
+    composes: label from 'sharedStyles.css';
+    color: hotpink;
+}
+.display_container{
+    composes: display-center from 'sharedStyles.css';
+}

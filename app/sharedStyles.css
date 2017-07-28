@@ -1,0 +1,34 @@
+body{
+    
+    height: 100vh;
+    background-color: ghostwhite;
+margin:1em;
+    padding: 1em;
+    border:0.1em solid pink;
+
+    font-family: "Apple Chancery";
+}
+
+.display-row{
+    display: flex;
+    align-items: flex-start;
+    justify-content:space-between;
+}
+
+.display-center{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+
+}
+.font-bigger{
+    font-size: 8em;
+}
+.font-medium{
+    font-size: 3em;
+}
+
+.label{
+    font-weight: 900;
+
+}

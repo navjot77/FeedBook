@@ -1,0 +1,23 @@
+.display_nav{
+    composes: display-row from 'sharedStyles.css';
+text-transform: uppercase;
+    color:slateblue;
+   font-size:1em;
+    font-weight:bolder;
+}
+
+
+.display_list{
+    list-style-type: none;
+    composes: display-row from 'sharedStyles.css';
+
+
+}
+.display_list li{
+    padding:1em;
+    font-family:sans-serif;
+    font-weight: 900;
+}
+.display_list li:hover{
+    color:red;
+}

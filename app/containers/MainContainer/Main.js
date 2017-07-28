@@ -1,13 +1,13 @@
 import React from 'react'
+import {HomeC} from 'components'
 
 class Main extends React.Component {
-
   constructor (props) {
     super(props)
   }
 
   render () {
-    return (<h1>{'Welcome Duck....'}</h1>)
+    return <HomeC />
   }
 
 }
