@@ -5,7 +5,13 @@
 }
 .display_label{
 composes: font-medium from 'sharedStyles.css';
-
+    display: block;
+    background-color: ghostwhite;
+    margin:10px;
+    padding:10px;
+}
+.display_label :hover{
+    font-size:40px;
 }
 .display_container{
     composes: display-center from 'sharedStyles.css';

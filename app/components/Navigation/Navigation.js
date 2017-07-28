@@ -1,12 +1,14 @@
 import React from 'react'
 import {active, display_nav, display_list} from './styles.css'
-
+import {NavLink} from 'react-router-dom'
 
 function NavLinks(props){
     return ( <div >
         {props.isAuthed===true
         ?<ul  className={display_list}><li>Home</li></ul>
-        :<ul  className={display_list}><li>Home</li> <li>LogIn</li></ul>}
+        :<ul  className={display_list}><li>Home</li>
+                <li><NavLink to='/auth'>LogIn</NavLink></li>
+            </ul>}
     </div>)
 
 

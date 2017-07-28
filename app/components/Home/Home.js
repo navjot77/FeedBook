@@ -5,7 +5,7 @@ function HomeC() {
         return (
 
                 <div className={display_container}>
-                    <h1 className={display_header}>FeedBook</h1>
+                    <h1 className={display_header}>Feed-Rr</h1>
                     <h3 className={display_label}>Find New Friends, Socialize, Network......</h3>
                 </div>
 

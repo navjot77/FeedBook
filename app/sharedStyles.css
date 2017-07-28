@@ -1,12 +1,13 @@
 body{
-    
+
     height: 100vh;
     background-color: ghostwhite;
 margin:1em;
     padding: 1em;
     border:0.1em solid pink;
 
-    font-family: "Apple Chancery";
+    font-family: "serif";
+
 }
 
 .display-row{
@@ -22,13 +23,14 @@ margin:1em;
 
 }
 .font-bigger{
-    font-size: 8em;
+    font-size: 80px;
+    letter-spacing: .05em;
+    font-family: sans-serif;
+    color:slateblue;
 }
 .font-medium{
-    font-size: 3em;
-}
-
-.label{
+    font-size: 20px;
+    letter-spacing: .05em;
     font-weight: 900;
-
+    color:slateblue;
 }

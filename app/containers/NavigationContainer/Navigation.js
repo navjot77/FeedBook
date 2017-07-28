@@ -7,7 +7,7 @@ class Navigation extends React.Component {
         super(props)
 
         this.state={
-            isAuthed:true
+            isAuthed:false
         }
 
     }
