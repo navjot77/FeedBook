@@ -4,7 +4,7 @@ export default function getAuth(){
         resolve(
             {
             name:'Navjot Singh',
-            user:'navjot77',
+            uid:'navjot77',
             avatar:'http://www.newsshare.in/wp-content/uploads/2017/01/Navjot-Singh-Sidhu-5.jpg'
         }
         )
