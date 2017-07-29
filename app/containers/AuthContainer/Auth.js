@@ -3,10 +3,11 @@
  */
 import React from 'react'
 import {AuthC} from 'components'
-import getAuth from 'helpers/auth'
+
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import * as UserActions from 'redux/modules/user'
+import { bindActionCreators } from 'redux'
 
 class Auth extends React.Component {
     constructor (props) {
@@ -14,14 +15,7 @@ class Auth extends React.Component {
         this.handleonAuth=this.handleonAuth.bind(this);
     }
     handleonAuth(){
-        this.props.dispatch(UserActions.fetchingUser());
-        getAuth().then((res)=>{
-            this.props.dispatch(UserActions.fetchSuccess(res.uid,res,Date.now()));
-            this.props.dispatch(UserActions.authUser(res.uid));
-
-        }).catch((err)=>{
-            this.props.dispatch(UserActions.fetchFailure(err))
-        })
+        this.props.dispatch(UserActions.applyMiddleThunkUsers())
 
     }
     render () {
@@ -45,7 +39,7 @@ function mapStateTProps(state){
     }
 
 }
-
-
+//Canbe used to bind dispact witha ctions and then actioncreators will be availabel in props.
+const mapDispatchToProps = (dispatch) => bindActionCreators(UserActions,dispatch);
 
 export default connect(mapStateTProps)(Auth)

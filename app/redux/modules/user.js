@@ -1,36 +1,36 @@
-
+import getAuth from 'helpers/auth';
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE'
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS'
 
-export function authUser(uid) {
+function authUser(uid) {
     return {
         type: AUTH_USER,
         uid,
     }
 }
 
-export function unauthUser() {
+function unauthUser() {
     return {
         type: UNAUTH_USER,
     }
 }
 
-export function fetchingUser() {
+function fetchingUser() {
     return {
     type: FETCHING_USER,
 }}
 
 
-export function fetchFailure() {
+function fetchFailure() {
     return {
     type: FETCHING_USER_FAILURE,
         error: 'Error fetching user.',
 }}
 
-export function fetchSuccess(uid,user,timestamp) {
+function fetchSuccess(uid,user,timestamp) {
     return {
     type: FETCHING_USER_SUCCESS,
         uid,
@@ -39,6 +39,22 @@ export function fetchSuccess(uid,user,timestamp) {
 }}
 
 
+export function applyMiddleThunkUsers(){
+
+    return function(dispatch) {
+
+         dispatch(fetchingUser());
+         return getAuth().then((res) => {
+
+            dispatch(fetchSuccess(res.uid, res, Date.now()));
+            dispatch(authUser(res.uid));
+
+        }).catch((err) => {
+            dispatch(fetchFailure(err))
+        })
+    }
+
+}
 const initialUserState = {
     lastUpdated: 0,
     info: {
