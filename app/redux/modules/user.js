@@ -1,4 +1,4 @@
-import getAuth from 'helpers/auth';
+import getAuth,{loggingOff} from 'helpers/auth';
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
@@ -53,6 +53,17 @@ export function applyMiddleThunkUsers(){
             dispatch(fetchFailure(err))
         })
     }
+
+}
+
+
+export function applyMiddleThunkLogout() {
+    return function(dispatch){
+    loggingOff();
+    dispatch(unauthUser())
+
+    }
+
 
 }
 const initialUserState = {

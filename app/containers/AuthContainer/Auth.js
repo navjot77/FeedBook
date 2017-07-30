@@ -8,17 +8,27 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import * as UserActions from 'redux/modules/user'
 import { bindActionCreators } from 'redux'
+import { Redirect} from 'react-router-dom'
+
 
 class Auth extends React.Component {
     constructor (props) {
         super(props);
         this.handleonAuth=this.handleonAuth.bind(this);
     }
-    handleonAuth(){
-        this.props.dispatch(UserActions.applyMiddleThunkUsers())
+    handleonAuth(e){
+
+        this.props.dispatch(UserActions.applyMiddleThunkUsers()).then(()=>{
+            console.log(this.props)
+        console.log('redirecting...');
+            this.props.history.push('/feed')
+            console.log(this.props)
+
+        })
 
     }
     render () {
+
 
         return <AuthC onAuth={this.handleonAuth} error={this.props.error} isFetching={this.props.isFetching} />
     }
@@ -32,7 +42,7 @@ Auth.prototypes={
 }
 
 function mapStateTProps(state){
-    console.log(state);
+
     return{
         isFetching:state.isFetching,
         error:state.error

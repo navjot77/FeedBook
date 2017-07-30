@@ -1,20 +1,23 @@
 import React from 'react'
 import {NavigationC} from 'components'
+import {connect } from 'react-redux'
 
 class Navigation extends React.Component {
 
     constructor (props) {
         super(props)
 
-        this.state={
-            isAuthed:false
-        }
-
     }
 
     render () {
-        return  (<NavigationC isAuthed={this.state.isAuthed}/>);
+
+
+        return  (<NavigationC isAuthed={this.props.isAuthed}/>);
     }
 
 }
-export default Navigation
+export default connect(
+    (state)=>({
+        isAuthed:state.isAuthed
+    })
+)(Navigation)

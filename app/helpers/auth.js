@@ -13,3 +13,12 @@ export default function getAuth(){
     })
 
 }
+
+export function loggingOff(){
+    console.log('helpers logging out')
+}
+
+export function checkIfAuthed (store) {
+    console.log(store.getState().isAuthed)
+    return store.getState().isAuthed
+}
