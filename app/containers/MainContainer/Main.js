@@ -26,6 +26,9 @@ componentDidMount(){
             this.props.history.push('/feed')
           }
       }
+      else{
+        this.props.dispatch(UserActionsC.removeFetching())
+      }
 
     })
 

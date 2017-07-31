@@ -4,6 +4,17 @@ const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE'
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS'
+const REMOVE_FETCH = 'REMOVE_FETCHING_API'
+
+
+
+export function removeFetching() {
+    return {
+        type: REMOVE_FETCH,
+
+    }
+}
+
 
 export function authUser(uid) {
     return {
@@ -138,6 +149,11 @@ export default function users (state = initialState, action) {
                     error: '',
                     [action.uid]: user(state[action.uid], action),
                 }
+        case REMOVE_FETCH:
+            return {
+                ...state,
+                isFetching:false,
+            }
         default :
             return state
     }
