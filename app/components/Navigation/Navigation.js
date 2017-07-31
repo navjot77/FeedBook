@@ -6,7 +6,7 @@ function NavLinks(props){
     return ( <div >
         {props.isAuthed===true
             ? <ul  className={display_list}>
-                <li><NavLink to='/'>Home</NavLink></li>
+                <li><NavLink to='/feed'>Home</NavLink></li>
             </ul>
         :<ul  className={display_list}><li><NavLink to='/'>Home</NavLink></li>
                 <li><NavLink to='/auth'>LogIn</NavLink></li>

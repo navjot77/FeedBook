@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import * as UserActions from 'redux/modules/user'
 import { bindActionCreators } from 'redux'
 import { Redirect} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 
 class Auth extends React.Component {
@@ -19,11 +20,8 @@ class Auth extends React.Component {
     handleonAuth(e){
 
         this.props.dispatch(UserActions.applyMiddleThunkUsers()).then(()=>{
-            console.log(this.props)
-        console.log('redirecting...');
-            this.props.history.push('/feed')
-            console.log(this.props)
 
+            this.props.history.push('/feed')
         })
 
     }
@@ -42,14 +40,13 @@ Auth.prototypes={
 }
 
 function mapStateTProps(state){
-
+console.log(state)
     return{
         isFetching:state.isFetching,
         error:state.error
     }
-
 }
 //Canbe used to bind dispact witha ctions and then actioncreators will be availabel in props.
 const mapDispatchToProps = (dispatch) => bindActionCreators(UserActions,dispatch);
 
-export default connect(mapStateTProps)(Auth)
+export default withRouter(connect(mapStateTProps)(Auth))

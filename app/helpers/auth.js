@@ -1,24 +1,21 @@
-export default function getAuth(){
-    return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-        resolve(
-            {
-            name:'Navjot Singh',
-            uid:'navjot77',
-            avatar:'http://www.newsshare.in/wp-content/uploads/2017/01/Navjot-Singh-Sidhu-5.jpg'
-        }
-        )
+import {ref, firebaseAuth} from '../config/constant'
 
-    },2000);
-    })
+import firebase from 'firebase'
+
+export default function getAuth(){
+    return firebaseAuth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
 
 }
 
 export function loggingOff(){
-    console.log('helpers logging out')
+    return firebaseAuth().signOut()
 }
 
 export function checkIfAuthed (store) {
-    console.log(store.getState().isAuthed)
     return store.getState().isAuthed
+}
+
+export function saveUser(user){
+    console.log(user)
+    return ref.child(`users/${user.uid}`).set(user).then(()=> user)
 }

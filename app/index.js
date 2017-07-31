@@ -12,6 +12,9 @@ const store=createStore(users,applyMiddleware(thunk));
 
 
 function checkAuth(){
+    if (store.getState().isFetching === true){
+        return
+    }
     return checkIfAuthed(store)
 
 }

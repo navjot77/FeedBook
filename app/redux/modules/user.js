@@ -1,11 +1,11 @@
-import getAuth,{loggingOff} from 'helpers/auth';
+import getAuth,{loggingOff, saveUser} from 'helpers/auth';
 const AUTH_USER = 'AUTH_USER'
 const UNAUTH_USER = 'UNAUTH_USER'
 const FETCHING_USER = 'FETCHING_USER'
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE'
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS'
 
-function authUser(uid) {
+export function authUser(uid) {
     return {
         type: AUTH_USER,
         uid,
@@ -18,19 +18,19 @@ function unauthUser() {
     }
 }
 
-function fetchingUser() {
+ function fetchingUser() {
     return {
     type: FETCHING_USER,
 }}
 
 
-function fetchFailure() {
+ function fetchFailure() {
     return {
     type: FETCHING_USER_FAILURE,
         error: 'Error fetching user.',
 }}
 
-function fetchSuccess(uid,user,timestamp) {
+export function fetchSuccess(uid,user,timestamp) {
     return {
     type: FETCHING_USER_SUCCESS,
         uid,
@@ -44,12 +44,17 @@ export function applyMiddleThunkUsers(){
     return function(dispatch) {
 
          dispatch(fetchingUser());
-         return getAuth().then((res) => {
-
-            dispatch(fetchSuccess(res.uid, res, Date.now()));
-            dispatch(authUser(res.uid));
-
-        }).catch((err) => {
+         return getAuth().then(({user,credential}) => {
+             const userData=user.providerData[0];
+             const userInfo={
+               name:userData.displayName,
+                 avatar:userData.photoURL,
+                 uid:user.uid
+             };
+             return dispatch(fetchSuccess(user.uid, userInfo, Date.now()));
+         }).then(({user})=>saveUser(user))
+             .then((user)=>dispatch(authUser(user.uid)))
+          .catch((err) => {
             dispatch(fetchFailure(err))
         })
     }
@@ -89,7 +94,7 @@ function user (state = initialUserState, action) {
 }
 
 const initialState = {
-    isFetching: false,
+    isFetching: true,
     error: '',
     isAuthed: false,
     authedId: '',
