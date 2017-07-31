@@ -1,6 +1,7 @@
 import React from 'react'
 import {active, display_nav, display_list} from './styles.css'
 import {NavLink} from 'react-router-dom'
+import {Modal} from 'containers'
 
 function NavLinks(props){
     return ( <div >
@@ -20,7 +21,7 @@ function ActionLinks(props) {
         <div>
             {props.isAuthed===true
                 ?<ul  className={display_list}>
-                    <li>New Ducks</li>
+                    <li><Modal /></li>
                     <li><NavLink to='/logout'>Logout</NavLink></li></ul>
                 :''}
         </div>)

@@ -11,13 +11,13 @@ export default function getRoutes(checkAuth){
                 <Switch>
                 <Route exact path='/' component={Main}></Route>
 
-                    <Route  path='/auth' render={()=>(checkAuth() && checkAuth() === false ? (
+                    <Route  path='/auth' render={()=>( checkAuth() === false ? (
                         <Auth />
                     ) :(
                         <Redirect to="/"/>
                     ) )}> </Route>
 
-                <Route  path='/feed' render={()=>(checkAuth() && checkAuth() === true ? (
+                <Route  path='/feed' render={()=>(checkAuth() === true ? (
                     <Feed />
                 ) :(
                     <Redirect to="/"/>

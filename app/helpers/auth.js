@@ -12,7 +12,7 @@ export function loggingOff(){
 }
 
 export function checkIfAuthed (store) {
-    return store.getState().isAuthed
+    return store.getState().users.isAuthed
 }
 
 export function saveUser(user){

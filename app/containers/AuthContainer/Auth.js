@@ -39,11 +39,11 @@ Auth.prototypes={
 
 }
 
-function mapStateTProps(state){
-console.log(state)
+function mapStateTProps({users}){
+console.log(users)
     return{
-        isFetching:state.isFetching,
-        error:state.error
+        isFetching:users.isFetching,
+        error:users.error
     }
 }
 //Canbe used to bind dispact witha ctions and then actioncreators will be availabel in props.

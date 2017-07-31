@@ -17,7 +17,7 @@ class Navigation extends React.Component {
 
 }
 export default connect(
-    (state)=>({
-        isAuthed:state.isAuthed
+    ({users})=>({
+        isAuthed:users.isAuthed
     })
 )(Navigation)

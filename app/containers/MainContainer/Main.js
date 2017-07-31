@@ -41,9 +41,9 @@ componentDidMount(){
 }
 
 
-function stateToProps(state){
+function stateToProps({users}){
   return{
-    isFetching:state.isFetching
+    isFetching:users.isFetching
   }
 
 
