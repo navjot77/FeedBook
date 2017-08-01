@@ -46,7 +46,7 @@ const base= {
 
 const developmentConfig= {
 
-  devtool:'cheap-module-inline-source-map',
+  devtool:'cheap-module-source-map',
     devServer: {
         contentBase: paths.build,
         hot: true,

@@ -16,6 +16,6 @@ export function checkIfAuthed (store) {
 }
 
 export function saveUser(user){
-    console.log(user)
+
     return ref.child(`users/${user.uid}`).set(user).then(()=> user)
 }

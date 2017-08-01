@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 
 import * as modalActionCreators from 'redux/modules/modal'
 
+import * as ducksCreators from 'redux/modules/ducks'
 
 import { bindActionCreators } from 'redux'
 
@@ -15,13 +16,12 @@ class Modal extends React.Component{
     }
     render(){
 
-        console.log('Inside modal container')
         return(
 
             <ModalC user={this.props.user}  duckText={this.props.duckText}
             isOpen={this.props.isOpen} isSubmitDisabled={this.props.isSubmitDisabled}
             openModal={this.props.openModal} closeModal={this.props.closeModal}
-            updateModal={this.props.updateModal} />
+            updateModal={this.props.updateModal} duckFanout={this.props.duckFanout}/>
         )
     }
 
@@ -40,7 +40,7 @@ function mapStateToProps ({modal, users}) {
     }
 }
 function mapDispatchToProps (dispatch, props) {
-    return bindActionCreators(modalActionCreators, dispatch)
+    return bindActionCreators({...modalActionCreators, ...ducksCreators}, dispatch)
 }
 
 export default connect(
