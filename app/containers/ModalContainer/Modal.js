@@ -26,8 +26,6 @@ class Modal extends React.Component{
     }
 
 
-
-
 }
 
 function mapStateToProps ({modal, users}) {
