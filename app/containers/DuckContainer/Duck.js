@@ -3,10 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {DuckC} from 'components'
 import {withRouter} from 'react-router-dom'
-
-
-
-
+import {bindActionCreators} from 'redux'
+import * as likeActionCreators from 'redux/modules/usersLikes'
 class Duck extends React.Component{
 
     constructor(props){
@@ -16,13 +14,19 @@ class Duck extends React.Component{
     }
 
    handleProfileClick(){
-    this.props.history.push('/')
+    this.props.history.push({
+        pathname:'/',
+        search:`?userId=${props.duck.uid}`
+    })
 
 }
   handleDuckClick(){
-    this.props.history.push('/duckDetails/')
+      this.props.history.push({
+          pathname:'/duckDetails/',
+          search:`?duckId=${props.duck.duckId}`
+      })
 
-}
+  }
 
     render(){
         return(
@@ -48,6 +52,8 @@ Duck.propTypes={
     activeLike:PropTypes.bool.isRequired,
     addLikeCount:PropTypes.func,
     removeLikeCount:PropTypes.func,
+    addLikeThunk:PropTypes.func.isRequired,
+    removeLikeThunk:PropTypes.func.isRequired,
 }
 
 
@@ -64,5 +70,10 @@ function stateToProps({ducks,usersLikes, likeCount},props){
         showReplies: props.showReplies,
     }
 }
+function mapActionToDispatch(dispatch){
+ 
+    return bindActionCreators(likeActionCreators, dispatch)
 
-export default withRouter(connect(stateToProps)(Duck))
+
+}
+export default withRouter(connect(stateToProps,mapActionToDispatch)(Duck))

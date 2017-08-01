@@ -1,5 +1,7 @@
 export const ADD_LIKE = 'ADD_LIKE'
 export const REMOVE_LIKE = 'REMOVE_LIKE'
+import {fetchUserLikes, addLikeF,removeLikeF,addUsersLikeF,removeUsersLikeF} from 'helpers/api'
+
 const FETCHING_LIKES = 'FETCHING_LIKES'
 const FETCHING_LIKES_ERROR = 'FETCHING_LIKES_ERROR'
 const FETCHING_LIKES_SUCCESS = 'FETCHING_LIKES_SUCCESS'
@@ -38,6 +40,46 @@ function fetchingLikesSuccess (likes) {
         likes,
     }
 }
+
+
+export function addLikeThunk(duckId,e){
+    e.preventDefault();
+
+    return function(dispatch,getState){
+            dispatch(addLike(duckId));
+
+            const uid=getState().users.authedId;
+
+            Promise.all([addLikeF(duckId),
+                        addUsersLikeF(uid,duckId)]).catch((err)=>{
+
+                console.log('Adding likes to Firebase error.');
+                dispatch(removeLike(duckId))
+            })
+    }
+}
+
+
+
+export function removeLikeThunk(duckId,e){
+    e.preventDefault();
+
+    return function(dispatch,getState){
+        dispatch(removeLike(duckId));
+
+        const uid=getState().users.authedId;
+
+        Promise.all([removeLikeF(duckId),
+            removeUsersLikeF(uid,duckId)]).catch((err)=>{
+
+            console.log('Adding likes to Firebase error.');
+            dispatch(addLike(duckId))
+        })
+    }
+}
+
+
+
 
 const initialState = {
     isFetching: false,
