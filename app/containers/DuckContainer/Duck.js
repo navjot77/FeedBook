@@ -10,28 +10,32 @@ class Duck extends React.Component{
     constructor(props){
         super(props)
         this.handleDuckClick=this.handleDuckClick.bind(this);
-        this.handleProfileClick=this.handleDuckClick.bind(this)
+        this.handleProfileClick=this.handleProfileClick.bind(this)
     }
 
-   handleProfileClick(){
+   handleProfileClick(e){
+        console.log('profile click')
+     e.stopPropagation();
     this.props.history.push({
-        pathname:'/',
-        search:`?userId=${props.duck.uid}`
+        pathname:'/user/',
+        search:`?userId=${this.props.duck.uid}`
     })
 
 }
   handleDuckClick(){
+      console.log('duck click')
+
       this.props.history.push({
           pathname:'/duckDetails/',
-          search:`?duckId=${props.duck.duckId}`
+          search:`?duckId=${this.props.duck.duckId}`
       })
 
   }
 
     render(){
         return(
-            <DuckC onProfieClick={this.handleProfileClick}
-                   onClick={this.props.showReplies === true ? null : this.handleDuckClick}
+            <DuckC onProfileClick={this.handleProfileClick}
+                   onClick={this.props.showReplies === false ? null : this.handleDuckClick}
                    {...this.props}/>
         )
     }
@@ -50,8 +54,6 @@ Duck.propTypes={
     showLikeCount:PropTypes.bool.isRequired,
     showReplies:PropTypes.bool.isRequired,
     activeLike:PropTypes.bool.isRequired,
-    addLikeCount:PropTypes.func,
-    removeLikeCount:PropTypes.func,
     addLikeThunk:PropTypes.func.isRequired,
     removeLikeThunk:PropTypes.func.isRequired,
 }
@@ -71,7 +73,7 @@ function stateToProps({ducks,usersLikes, likeCount},props){
     }
 }
 function mapActionToDispatch(dispatch){
- 
+
     return bindActionCreators(likeActionCreators, dispatch)
 
 

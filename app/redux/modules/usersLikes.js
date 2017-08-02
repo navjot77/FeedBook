@@ -43,7 +43,7 @@ function fetchingLikesSuccess (likes) {
 
 
 export function addLikeThunk(duckId,e){
-    e.preventDefault();
+    e.stopPropagation();
 
     return function(dispatch,getState){
             dispatch(addLike(duckId));
@@ -62,11 +62,11 @@ export function addLikeThunk(duckId,e){
 
 
 export function removeLikeThunk(duckId,e){
-    e.preventDefault();
+    e.stopPropagation();
 
     return function(dispatch,getState){
         dispatch(removeLike(duckId));
-
+        dispatch(fetchingLikes)
         const uid=getState().users.authedId;
 
         Promise.all([removeLikeF(duckId),
@@ -78,7 +78,19 @@ export function removeLikeThunk(duckId,e){
     }
 }
 
+export function setUsersLikesThunk(){
 
+    return function(dispatch,getState){
+        const uid=getState().users.authedId;
+
+        fetchUserLikes(uid).then((likes)=>{
+            return dispatch(fetchingLikesSuccess(likes))
+
+        })
+            .catch((err)=> dispatch(fetchLikesError(err)))
+    }
+
+}
 
 
 const initialState = {

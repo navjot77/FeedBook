@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import {firebaseAuth} from 'config/constant'
 import * as UserActionsC from 'redux/modules/user'
+import * as UserLikeActionC from 'redux/modules/usersLikes'
 
 class Main extends React.Component {
   constructor (props) {
@@ -22,6 +23,7 @@ componentDidMount(){
           };
           this.props.dispatch(UserActionsC.authUser(userInfo.uid));
           this.props.dispatch(UserActionsC.fetchSuccess(user.uid, userInfo, Date.now()));
+          this.props.dispatch(UserLikeActionC.setUsersLikesThunk());
           if(this.props.location.pathname === '/'){
             this.props.history.push('/feed')
           }

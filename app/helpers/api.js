@@ -40,28 +40,24 @@ export function listenToFeed (cb, errorCB) {
 
 
 export function fetchUserLikes(uid){
-    return ref.child('userLikes').once('value').then((snapshot)=>{
-        snapshot.val() || {}
-    })
+
+        return ref.child(`userLikes/${uid}`).once('value')
+            .then((snapshot) => snapshot.val() || {})
 
 }
-export function addlikeF(duckId){
-    return ref.child(`likeCount/${duckId}`).transaction((current=0)=>{
-        current+1;
-    })
+export function addLikeF(duckId){
+    return ref.child(`likeCount/${duckId}`).transaction((current=0)=>current+1)
 
 }
-export function removelikeF(duckId){
-    return ref.child(`likeCount/${duckId}`).transaction((current=0)=>{
-        current-1;
-    })
+export function removeLikeF(duckId){
+    return ref.child(`likeCount/${duckId}`).transaction((current=0)=>current-1)
 
 }
-export function addUserslikeF(uid,duckid){
-    return ref.child(`userLikes/${uid}/${duckid}`).set(true);
+export function addUsersLikeF(uid,duckId){
+    return ref.child(`userLikes/${uid}/${duckId}`).set(true);
 
 }
-export function removeUserslikeF(){
-    return ref.child(`userLikes/${uid}/${duckid}`).set(null);
+export function removeUsersLikeF(uid,duckId){
+    return ref.child(`userLikes/${uid}/${duckId}`).set(null);
 
 }
